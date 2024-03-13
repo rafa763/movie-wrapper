@@ -1,0 +1,12 @@
+GET http://localhost:8888/trending?page=1&time_window=dayx
+Content-Type: application/json
+
+###
+GET http://localhost:8888/test
+Content-Type: application/json
+
+###
+
+GET http://localhost:8888/shows?page=1
+Content-Type: application/json
+

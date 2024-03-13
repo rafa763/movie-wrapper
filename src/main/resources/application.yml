@@ -1,0 +1,19 @@
+server:
+  port: 8888
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: false
+
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          TMDB:
+            url: https://api.themoviedb.org/3
+            connectTimeout: 5000
+            readTimeout: 5000
+            loggerLevel: full
+            defaultRequestHeaders:
+              Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDYzNDU1NTgwYjAzNWIzNjFkMGZkZDRmMDNhYmQ0OSIsInN1YiI6IjY1YzIzYTI0ZmM1ZjA2MDBlOGM1MGE5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dEIjbTnfcMrbQ9OLj0VnC5zGhjdFzk1sAndtMvI69sE
