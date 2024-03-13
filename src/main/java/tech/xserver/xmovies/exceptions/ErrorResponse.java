@@ -15,9 +15,11 @@ public class ErrorResponse {
     private LocalDateTime timestamp;
     private String note = "This is a custom error message by Xserver API";
 
+
     public ErrorResponse(HttpStatus httpStatus, String anUnexpectedErrorOccurred, LocalDateTime now) {
         this.status = httpStatus;
         this.message = anUnexpectedErrorOccurred;
         this.timestamp = now;
     }
+
 }

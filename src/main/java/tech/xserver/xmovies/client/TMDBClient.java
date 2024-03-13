@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("TMDB")
 public interface TMDBClient {
     @RequestMapping(method = RequestMethod.GET, value ="/discover/movie")
-    ResponseEntity<Object> getMovies();
+    ResponseEntity<Object> getMovies(@RequestParam("page") Integer pageNumber);
 
     @RequestMapping(method = RequestMethod.GET, value ="/discover/tv")
     ResponseEntity<Object> getShows(@RequestParam("page") Integer pageNumber);
 
     @RequestMapping(method = RequestMethod.GET, value ="/trending/all/{time_window}")
-    ResponseEntity<Object> getTrending(@PathVariable("time_window") String timeWindow, @RequestParam("page") Integer pageNumber);
+    ResponseEntity<Object> getTrending(
+            @PathVariable("time_window") String timeWindow,
+            @RequestParam("page") Integer pageNumber,
+            @RequestParam("size") Integer size
+    );
 }
