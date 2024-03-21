@@ -12,6 +12,9 @@ public interface TMDBClient {
     @RequestMapping(method = RequestMethod.GET, value ="/discover/movie")
     ResponseEntity<Object> getMovies(@RequestParam("page") Integer pageNumber);
 
+    @RequestMapping(method = RequestMethod.GET, value ="/movie/{id}")
+    ResponseEntity<Object> getMovie(@PathVariable("id") Long id);
+
     @RequestMapping(method = RequestMethod.GET, value ="/discover/tv")
     ResponseEntity<Object> getShows(@RequestParam("page") Integer pageNumber);
 

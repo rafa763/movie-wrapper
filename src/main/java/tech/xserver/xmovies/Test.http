@@ -1,4 +1,4 @@
-GET http://localhost:8888/trending?page=8&time_window=day&size=40
+GET http://localhost:8888/trending?page=1
 Content-Type: application/json
 
 ###
@@ -7,11 +7,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8888/shows?page=2x
+GET http://localhost:8888/movie/1011985
 Content-Type: application/json
 
 ###
 
-GET http://localhost:8888/movies?page=30x
+GET http://localhost:8888/movies?page=30
 Content-Type: application/json
 

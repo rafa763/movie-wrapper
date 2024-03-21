@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import tech.xserver.xmovies.exceptions.BadReqException;
 import tech.xserver.xmovies.services.MovieService;
 import tech.xserver.xmovies.validators.TimeWindow;
 
@@ -30,25 +30,30 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    public ResponseEntity<?> getMovies(@RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) String pageNumber){
-        return new ResponseEntity<>(service.getMovies(Integer.parseInt(pageNumber)), HttpStatus.OK);
+    public ResponseEntity<?> getMovies(@RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) Integer pageNumber){
+        return new ResponseEntity<>(service.getMovies(pageNumber), HttpStatus.OK);
+    }
+
+    @GetMapping("/movie/{id}")
+    public ResponseEntity<?> getMovie(@PathVariable Long id){
+        return new ResponseEntity<>(service.getMovie(id), HttpStatus.OK);
     }
 
     @GetMapping("/shows")
-    public ResponseEntity<?> getShows(@RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) String pageNumber){
-        return new ResponseEntity<>(service.getShows(Integer.parseInt(pageNumber)).getBody(), HttpStatus.OK);
+    public ResponseEntity<?> getShows(@RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) Integer pageNumber){
+        return new ResponseEntity<>(service.getShows(pageNumber), HttpStatus.OK);
     }
 
     @GetMapping("/trending")
     public ResponseEntity<?> getTrending(
             @RequestParam(value = "time_window", defaultValue = "day", required = false) @Valid TimeWindow timeWindow,
-            @RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) @Max(8500) String pageNumber,
-            @RequestParam(value = "size", defaultValue = "20", required = false) @Min(1) @Max(50) String size
+            @RequestParam(value = "page", defaultValue = "1", required = false) @Min(1) @Max(8500) Integer pageNumber,
+            @RequestParam(value = "size", defaultValue = "20", required = false) @Min(1) @Max(50) Integer size
     ) {
         return new ResponseEntity<>(
                 service.getTrending(String.valueOf(timeWindow),
-                        Integer.parseInt(pageNumber),
-                        Integer.parseInt(size)),
+                        pageNumber,
+                        size),
                 HttpStatus.OK
         );
     }

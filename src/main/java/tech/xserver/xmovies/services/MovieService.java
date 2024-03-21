@@ -14,19 +14,24 @@ public class MovieService {
         this.client = client;
     }
 
-    @Retryable(maxAttempts = 6, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
-    public ResponseEntity<Object> getMovies(Integer page) {
-        return client.getMovies(page);
+    @Retryable(maxAttempts = 2, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
+    public Object getMovies(Integer page) {
+        return client.getMovies(page).getBody();
     }
 
-    @Retryable(maxAttempts = 5, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
-    public ResponseEntity<Object> getShows(Integer page) {
-        return client.getShows(page);
+    @Retryable(maxAttempts = 2, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
+    public Object getMovie(Long id) {
+        return client.getMovie(id).getBody();
     }
 
-    @Retryable(maxAttempts = 5, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
-    public ResponseEntity<Object> getTrending(String timeWindow, Integer page, Integer size) {
-        return client.getTrending(timeWindow, page, size);
+    @Retryable(maxAttempts = 2, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
+    public Object getShows(Integer page) {
+        return client.getShows(page).getBody();
+    }
+
+    @Retryable(maxAttempts = 2, value = RuntimeException.class, backoff = @Backoff(delay = 1000, multiplier = 2))
+    public Object getTrending(String timeWindow, Integer page, Integer size) {
+        return client.getTrending(timeWindow, page, size).getBody();
     }
 
 
